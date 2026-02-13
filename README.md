@@ -32,10 +32,10 @@ The platform follows a **Lambda Architecture** (Hot/Cold paths):
 
 | Service | URL |
 | :--- | :--- |
-| **Streamlit Dashboard** | [http://localhost:8501](http://localhost:8501) |
-| **Spark Master UI** | [http://localhost:8080](http://localhost:8080) |
-| **Kafka Broker** | `localhost:9092` |
-| **Redis** | `localhost:6379` |
+| **Streamlit Dashboard** | [http://localhost:8505](http://localhost:8505) |
+| **Spark Master UI** | [http://localhost:8085](http://localhost:8085) |
+| **Kafka Broker** | `localhost:9095` |
+| **Redis** | `localhost:6381` |
 
 ## 🛠️ Technical Details
 

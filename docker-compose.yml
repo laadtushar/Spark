@@ -10,11 +10,11 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - "9092:9092"
+      - "9095:9092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9095
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -25,8 +25,8 @@ services:
       - SPARK_MODE=master
       - SPARK_NO_DAEMONIZE=true
     ports:
-      - "8080:8080"
-      - "7077:7077"
+      - "8085:8080"
+      - "7079:7077"
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
 
   spark-worker:
@@ -43,7 +43,7 @@ services:
   redis:
     image: redis:alpine
     ports:
-      - "6379:6379"
+      - "6381:6379"
 
   ingestion:
     build: ./ingestion
@@ -57,7 +57,7 @@ services:
     depends_on:
       - redis
     ports:
-      - "8501:8501"
+      - "8505:8501"
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
