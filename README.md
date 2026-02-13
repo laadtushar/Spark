@@ -2,6 +2,17 @@
 
 A Real-Time Labor Market Analytics Platform demonstrating high-throughput data ingestion, stream processing, and live visualization using **Apache Kafka**, **Apache Spark (Structured Streaming)**, **Redis**, and **Streamlit**.
 
+## 🛠️ Built With
+
+- **Languages:** ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+- **Stream Processing:** ![Apache Spark](https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white) (Structured Streaming)
+- **Message Broker:** ![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
+- **Databases:** ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white) (Real-time State)
+- **Storage Formats:** ![Parquet](https://img.shields.io/badge/Apache_Parquet-000000?style=for-the-badge) (Cold Storage)
+- **Dashboard:** ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white) ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+- **Infrastructure:** ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Docker Compose](https://img.shields.io/badge/docker_compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+- **Orchestration:** Zookeeper (Kafka)
+
 ## 🏗️ Architecture
 
 The platform follows a **Lambda Architecture** (Hot/Cold paths):
