@@ -20,24 +20,30 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   spark-master:
-    image: apache/spark:3.5.0
+    build: ./spark-base
     environment:
       - SPARK_MODE=master
       - SPARK_NO_DAEMONIZE=true
+    user: root
     ports:
       - "8085:8080"
       - "7079:7077"
+    volumes:
+      - ./data:/data
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
 
   spark-worker:
-    image: apache/spark:3.5.0
+    build: ./spark-base
     depends_on:
       - spark-master
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
+    user: root
+    volumes:
+      - ./data:/data
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
 
   redis:
@@ -58,6 +64,22 @@ services:
       - redis
     ports:
       - "8505:8501"
+    volumes:
+      - ./dashboard:/app
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
+
+  spark-processor:
+    build: ./spark-jobs
+    user: root
+    depends_on:
+      - spark-master
+      - kafka
+      - redis
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    volumes:
+      - ./spark-jobs:/app
+      - ./data:/data
+    command: /opt/spark/bin/spark-submit --master spark://spark-master:7077 --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 --executor-memory 512m --total-executor-cores 1 /app/processor.py
